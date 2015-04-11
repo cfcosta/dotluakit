@@ -183,6 +183,18 @@ add_binds("normal", {
             if not m.count then w:scroll{ y = 0 } else return false end
         end),
 
+    key({"Control"}, "p", "Sends URL to getpocket.com (requires mailx properly configured)",
+        function (w)
+            local uri = w.view.uri
+            local temp_name = os.tmpname()
+
+            os.execute(string.format("/usr/bin/bash -c 'echo %s > %s'", uri, temp_name))
+            os.execute(string.format("/usr/bin/bash -c 'mailx -v add@getpocket.com < %s &'", temp_name))
+            os.remove(temp_name)
+
+            w:notify(string.format("Sent %s to Pocket.", uri))
+        end),
+
     key({"Control"}, "e", "Scroll document down.",
         function (w) w:scroll{ yrel =  scroll_step } end),
 
