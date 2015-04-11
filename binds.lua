@@ -188,11 +188,12 @@ add_binds("normal", {
             local uri = w.view.uri
             local temp_name = os.tmpname()
 
-            os.execute(string.format("/usr/bin/bash -c 'echo %s > %s'", uri, temp_name))
-            os.execute(string.format("/usr/bin/bash -c 'mailx -v add@getpocket.com < %s &'", temp_name))
-            os.remove(temp_name)
-
-            w:notify(string.format("Sent %s to Pocket.", uri))
+            luakit.spawn(string.format("/usr/bin/bash -c 'echo %s > %s'", uri, temp_name), function ()
+                luakit.spawn(string.format("/usr/bin/bash -c 'mailx -v add@getpocket.com < %s'", temp_name), function ()
+                    os.remove(temp_name)
+                    w:notify(string.format("Sent %s to Pocket.", uri))
+                end)
+            end)
         end),
 
     key({"Control"}, "e", "Scroll document down.",
