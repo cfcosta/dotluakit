@@ -1,13 +1,12 @@
 -- Global variables for luakit
 globals = {
-    homepage            = "http://luakit.org/",
- -- homepage            = "http://github.com/mason-larobina/luakit",
+    homepage            = "http://duckduckgo.com/",
     scroll_step         = 40,
     zoom_step           = 0.1,
     max_cmd_history     = 100,
     max_srch_history    = 100,
  -- http_proxy          = "http://example.com:3128",
-    default_window_size = "800x600",
+    default_window_size = "1920x1080",
 
  -- Disables loading of hostnames from /etc/hosts (for large host files)
  -- load_etc_hosts      = false,
@@ -59,7 +58,7 @@ search_engines = {
 }
 
 -- Set google as fallback search engine
-search_engines.default = search_engines.google
+search_engines.default = search_engines.duckduckgo
 -- Use this instead to disable auto-searching
 --search_engines.default = "%s"
 
